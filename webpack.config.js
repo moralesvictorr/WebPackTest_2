@@ -9,6 +9,9 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'build')
     },
+    devServer: {
+      open: true
+    },
     module: {
         rules: [
           {
@@ -21,6 +24,23 @@ module.exports = {
               }
             }
           },
+          { 
+            test: /\.css$/, 
+            use: ["style-loader", "css-loader"] 
+          },
+          { 
+            test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+            type: 'asset/resource',
+          },
+          {
+            test: /\.s[ac]ss$/,
+            exclude: /node_modules/,
+            use: [
+              'style-loader',
+              'css-loader',
+              'sass-loader'
+            ]
+          }
         ]
       },
     plugins: [
